@@ -1,5 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import javax.print.DocFlavor.INPUT_STREAM;
 public class App {
     public static double altura, radio, generatriz, areaZonaEsferica, volumenZonaEsferica,
     areatotal, arealateral, volumen, areaPentagonal, volumenCasquete, areaCasquete,
@@ -15,7 +17,8 @@ public class App {
 
         System.out.println("FIGURAS GEOMETRICAS");
         System.out.println("¿Que figura desea hacer?");
-        System.out.println("1) Cilindro\n" + 
+        System.out.println(
+        "1) Cilindro\n" + 
         "2) Cono\n" +
         "3) Cuña Esferica\n" +
         "4) Dodecaedro\n" +
@@ -32,75 +35,92 @@ public class App {
         "15) Tronco de piramide\n" +
         "16) Zona esferica y Casquete esferico\n"+
         "17) Salir");
-        while (count < 3) {
-            try {
-                
-            } catch (InputMismatchException e) {
-                // TODO: handle exception
-            }
-            
-        }
+        
         do {
-          opc = scanner.nextByte(); 
+        
+            opc = scanner.nextByte();
 
         } while (opc <1 || opc > 17);
         
         switch (opc) {
             case 1->{
-                
-                while (count < 3) {
-                    try {
-                        System.out.println("CILINDRO");
+                System.out.println("CILINDRO");
+        while (count < 3) {
+            try {
+                System.out.print("Introduzca el radio: ");
+                do {
+                    radio = scanner.nextDouble();
+                    if (radio <= 0) {
+                        System.out.println("Valor incorrecto, el radio debe ser positivo");
                         System.out.print("Introduzca el radio: ");
-                        do {
-                            radio = scanner.nextDouble();
-                            if (radio <= 0) {
-                                System.out.println("Valor incorrecto, el radio debe ser positivo.");
-                                System.out.print("Introduzca el radio: ");
-                            }
-                        } while (radio <= 0);
-                
-                        System.out.print("Introduzca el altura: ");
-                        do {
-                            altura = scanner.nextDouble();
-                            if (altura <= 0) {
-                                System.out.println("Valor incorrecto, la altura debe ser positiva.");
-                                System.out.print("Introduzca el altura: ");
-                            }
-                        } while (altura <= 0);
-                
-                        break; 
-                    } catch (InputMismatchException e) {
-                        System.out.println("Valor incorrecto, intente nuevamente.");
-                        scanner.nextLine(); 
-                        count++;
                     }
-                }
-                if (count == 3) {
-                    System.out.println("Se agotaron los intentos.");
-                } else {
-                    double arealateral = 2 * (3.1416) * radio * altura;
-                    double areatotal = 2 * (3.1416) * radio * (altura + radio);
-                    double volumen = (3.1416) * (radio * radio) * altura;
+                } while (radio <= 0);
                 
-                    System.out.println("el area lateral es: " + arealateral);
-                    System.out.println("el area total es: " + areatotal);
-                    System.out.println("el volumen es: " + volumen);
-                }
+                System.out.print("Introduzca la altura: ");
+                do {
+                    altura = scanner.nextDouble();
+                    if (altura <= 0) {
+                        System.out.println("Valor incorrecto, la altura debe ser positivo");
+                        System.out.print("Introduzca la altura: ");
+                    }
+                } while (altura <= 0);
+                
+                break;
+                
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            } 
+        }
+        if(count == 3){
+            System.out.println("Se agotaron los intentos.");
+        }else {
+            arealateral = 2 * (3.1416) * radio * altura;
+            areatotal = 2 * (3.1416) * radio * (altura + radio);
+            volumen = (3.1416) * (radio * radio) * altura;
+        
+            System.out.println("el area lateral es: " + arealateral);
+            System.out.println("el area total es: " + areatotal);
+            System.out.println("el volumen es: " + volumen);
+        }
+
             }
             case 2->{
         System.out.println("CONO");
-        System.out.print("Ingrese la altura: ");
-        do {
-            altura = scanner.nextDouble();
-        } while (altura <= 0);
-        System.out.print("Ingrese el radio: ");
-        do {
-            radio = scanner.nextDouble();
-        } while (radio <= 0);
+        
+        while (count < 3) {
+            try {
+                System.out.print("Introduzca la altura: ");
+                do {
+                    altura = scanner.nextDouble();
+                    if (altura <= 0) {
+                        System.out.println("Valor incorrecto, la altura debe ser positivo");
+                        System.out.print("Introduzca la altura: ");
+                    }
+                } while (altura <= 0);
 
+                System.out.print("Introduzca el radio: ");
+                do {
+                    radio = scanner.nextDouble();
+                    if (radio <= 0) {
+                        System.out.println("Valor incorrecto, el radio debe ser positivo");
+                        System.out.print("Introduzca el radio: ");
+                    }
+                } while (radio <= 0);
+                
+                break;
+
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
+        if(count == 3){
+            System.out.println("Se agotaron los intentos.");
+        }else {
         generatriz = Math.sqrt((altura*altura) + (radio*radio));
-
         arealateral = (3.1416) * radio * generatriz;
         areatotal = (3.1416) * radio * (generatriz + radio);
         volumen = ((3.1416) * (radio*radio) * altura)/3;
@@ -109,30 +129,71 @@ public class App {
         System.out.println("El area lateral es: " + arealateral);
         System.out.println("El area total es: "+ areatotal);
         System.out.println("El volumen es: "+ volumen);
+        }
             }
             case 3->{
         System.out.println("CUÑA ESFERICA");
-        System.out.print("Ingrese el radio: ");
-        do {
-            radio = scanner.nextDouble();
-        } while (radio <= 0);
-        System.out.print("Ingrese los grados: ");
-        do {
-            nGrado = scanner.nextDouble();
-        } while (nGrado <= 0);
 
+        while (count < 3) {
+            try {
+                System.out.print("Introduzca el radio: ");
+                do {
+                    radio = scanner.nextDouble();
+                    if (radio <= 0) {
+                        System.out.println("Valor incorrecto, el radio debe ser positivo");
+                        System.out.print("Introduzca el radio: ");
+                    }
+                } while (radio <= 0);
+
+                System.out.print("Ingrese los grados: ");
+                do {
+                    nGrado = scanner.nextDouble();
+                    if (nGrado <= 0) {
+                        System.out.println("Valor incorrecto, los grados deben ser positivos");
+                        System.out.print("Introduzca los grados: ");
+                    }
+                } while (nGrado <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
+        if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+        }else {
         volumen = (4/3)  * ((3.1416) * (radio*radio*radio) * nGrado)/360;
 
         System.out.println(":::::::::::::::::::::::::::::");
         System.out.println("El volumen es: "+ volumen);
+        }
             }
             case 4->{
-        System.out.println("DODECAEDRO");
-        System.out.print("Ingrese la arista: ");
-        do {
-            arista = scanner.nextDouble();
-        } while (arista <= 0);
 
+        System.out.println("DODECAEDRO");
+
+        while (count < 3) {
+            try {
+                System.out.print("Ingrese la arista: ");
+                do {
+                    arista = scanner.nextDouble();
+                    if (arista <= 0) {
+                        System.out.println("Valor incorrecto, la arista debe ser positiva");
+                        System.out.print("Ingrese la arista: ");
+                    }
+                } while (arista <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
+
+        if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+        }else {
         area = 3* (arista*arista) * Math.sqrt(25 + (10 * (Math.sqrt(5))));
         volumen = ((15 + (7 * (Math.sqrt(5))))/4) * (arista * arista * arista);
         apotema = arista/(1.45);
@@ -142,100 +203,213 @@ public class App {
         System.out.println("El area es: "+ area);
         System.out.println("El volumen es: " + volumen);
         System.out.println("El area pentagonal es: " + areaPentagonal);
+        }
             }
+            
             case 5->{
         System.out.println("ESFERA");
-        System.out.print("Ingrese el radio: ");
-        do {
-            radio = scanner.nextDouble();
-        } while (radio <= 0);
+
+        while (count < 3) {
+            try {
+                System.out.print("Ingrese el radio: ");
+                do {
+                    radio = scanner.nextDouble();
+                    if (radio <= 0) {
+                        System.out.println("Valor incorrecto, el radio debe ser positivo");
+                        System.out.print("Ingrese el radio: ");
+                    }
+                } while (radio <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
         
+        if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+        }else {
         area = 4 * (3.1416) * (radio*radio);
         volumen = (1.33) * (3.1416) * radio*radio*radio;
 
         System.out.println("::::::::::::::::::::::::::::::");
         System.out.println("El area es: "+area);
         System.out.println("El volumen es: "+volumen);
-
+        }
             }
             case 6->{
         System.out.println("HEXAEDRO");
-        System.out.print("Ingrese la arista: ");
-        do {
-            arista = scanner.nextDouble();
-        } while (arista <= 0);
 
-        area = 6 * (arista*arista);
-        volumen = (arista*arista*arista);
-        diametro = arista * Math.sqrt(3);
+        while (count < 3) {
+            try {
+                System.out.print("Ingrese la arista: ");
+                do {
+                    arista = scanner.nextDouble();
+                    if (arista <= 0) {
+                        System.out.println("Valor incorrecto, la arista debe ser positiva");
+                        System.out.print("Ingrese la arista: ");
+                    }
+                } while (arista <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
 
-        System.out.println(":::::::::::::::::::::::::::");
-        System.out.println("El area es: "+ area);
-        System.out.println("El volumen es: " + volumen);
-        System.out.println("La diametro es: " + diametro);
-        
+        if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+        }else {
+        area = 4 * (3.1416) * (radio*radio);
+        volumen = (1.33) * (3.1416) * radio*radio*radio;
+
+        System.out.println("::::::::::::::::::::::::::::::");
+        System.out.println("El area es: "+area);
+        System.out.println("El volumen es: "+volumen);
+        }
             }
             case 7->{
         System.out.println("HUSO ESFERICO");
-        System.out.print("Ingrese el radio: ");
-        do {
-            radio = scanner.nextDouble();
-        } while (radio <= 0);
-        System.out.print
-        ("Ingrese los grados: ");
-        do {
-            nGrado = scanner.nextDouble();
-        } while (nGrado <= 0);
 
+        while (count < 3) {
+            try {
+                System.out.print("Ingrese el radio: ");
+                do {
+                    radio = scanner.nextDouble();
+                    if (radio <= 0) {
+                        System.out.println("Valor incorrecto, el radio debe ser positivo");
+                        System.out.print("Ingrese el radio: ");
+                    }
+                } while (radio <= 0);
+                System.out.print("Ingrese los grados: ");
+                do {
+                    nGrado = scanner.nextDouble();
+                    if (nGrado <= 0) {
+                        System.out.println("Valor incorrecto, los grados deben ser positivos");
+                        System.out.print("Ingrese los grados: ");
+                    }
+                } while (nGrado <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }        
+        if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+        }else {
         area = (4 * (3.1416) * (radio*radio) * nGrado)/360;
         System.out.println(":::::::::::::::::::::::::::::::::::");
         System.out.println("El area es: "+ area);
+        }
+
             }
             case 8->{
         System.out.println("ICOSAEDRO");
-        System.out.print("Ingrese la arista: ");
-        do {
-            arista = scanner.nextDouble();
-        } while (arista <= 0);
+        while (count < 3) {
+            try {
+                System.out.print("Ingrese la arista: ");
+                do {
+                    arista = scanner.nextDouble();
+                    if (arista <= 0) {
+                        System.out.println("Valor incorrecto, la arista debe ser positiva");
+                        System.out.print("Ingrese la arista: ");
+                    }
+                } while (arista <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
 
+        if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+        }else {
         area = 5 * (arista*arista) * Math.sqrt(3);
         volumen = ((5 * (3 + Math.sqrt(5)))/12) * (arista * arista * arista);
 
         System.out.println(":::::::::::::::::::::::::::");
         System.out.println("El area es: "+ area);
         System.out.println("El volumen es: " + volumen);
+        }
             }
             case 9->{
         System.out.println("OCTAEDRO");
-        System.out.print("Ingrese la arista: ");
-        do {
-            arista = scanner.nextDouble();
-        } while (arista <= 0);
 
+        while (count < 3) {
+            try {
+                System.out.print("Ingrese la arista: ");
+                do {
+                    arista = scanner.nextDouble();
+                    if (arista <= 0) {
+                        System.out.println("Valor incorrecto, la arista debe ser positiva");
+                        System.out.print("Ingrese la arista: ");
+                    }
+                } while (arista <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
+        if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+        }else {
         area = 2* (arista*arista) * Math.sqrt(3);
         volumen = (Math.sqrt(2)/3) * (arista * arista * arista);
 
         System.out.println(":::::::::::::::::::::::::::");
         System.out.println("El area es: "+ area);
         System.out.println("El volumen es: " + volumen);
+        }
             }
             case 10->{
         System.out.println("ORTOEDRO");
-        System.out.print("Ingrese la longitud: ");
-        do {
-            longitudLado = scanner.nextDouble();
-        } while (longitudLado <= 0);
-        
-        System.out.print("Ingrese la anchura: ");
-        do {
-            ancho = scanner.nextDouble();
-        } while (ancho <= 0);
-        
-        System.out.print("Ingrese la altura: ");
-        do {
-            altura = scanner.nextDouble();
-        } while (altura <= 0);
 
+        while (count < 3) {
+            try {
+                System.out.print("Ingrese la longitud: ");
+                do {
+                    longitudLado = scanner.nextDouble();
+                    if (longitudLado <= 0) {
+                        System.out.println("Valor incorrecto, la longitud debe ser positiva");
+                        System.out.print("Ingrese la longitud: ");
+                    }
+                } while (longitudLado <= 0);
+                
+                System.out.print("Ingrese la anchura: ");
+                do {
+                    ancho = scanner.nextDouble();
+                    if (ancho <= 0) {
+                        System.out.println("Valor incorrecto, la anchura debe ser positiva");
+                        System.out.print("Ingrese la anchura: ");
+                    }
+                } while (ancho <= 0);
+                
+                System.out.print("Ingrese la altura: ");
+                do {
+                    altura = scanner.nextDouble();
+                    if (altura <= 0) {
+                        System.out.println("Valor incorrecto, la altura debe ser positiva");
+                        System.out.print("Ingrese la altura: ");
+                    }
+                } while (altura <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
+        if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+        }else {
         area = 2 * ((longitudLado*ancho) + (longitudLado*altura) + (ancho*altura));
         diagonal = Math.sqrt((longitudLado*longitudLado) + (ancho*ancho) + (altura*altura));
         volumen = longitudLado*altura*ancho;
@@ -244,16 +418,39 @@ public class App {
         System.out.println("El area es: "+ area);
         System.out.println("El diagonal es: "+ diagonal);
         System.out.println("El volumen es: "+ volumen);
+        }
             }
             case 11->{
         System.out.println("PIRAMIDE");
-        System.out.print("Ingrese la altura: ");
-        do {
-            altura = scanner.nextDouble();
-        } while (altura <= 0);
-        System.out.print("Ingrese la longitud de los lados: ");
-        distancialados = scanner.nextDouble();
- 
+
+        while (count < 3) {
+            try {
+                System.out.print("Ingrese la altura: ");
+                do {
+                    altura = scanner.nextDouble();
+                    if (altura <= 0) {
+                        System.out.println("Valor incorrecto, la altura debe ser positiva");
+                        System.out.print("Ingrese la altura: ");
+                    }
+                } while (altura <= 0);
+                System.out.print("Ingrese la longitud de los lados: ");
+                do {
+                    distancialados = scanner.nextDouble();
+                    if (distancialados <= 0) {
+                        System.out.println("Valor incorrecto, la longitud debe ser positiva");
+                        System.out.print("Ingrese la longitud de los lados: ");
+                    }
+                } while (distanciaLados <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
+        if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+        }else {
         apotemaCentral = distancialados/2;
 
         apotema = Math.sqrt((altura * altura) + (apotemaCentral * apotemaCentral));
@@ -269,18 +466,38 @@ public class App {
         System.out.println("El area lateral es: " + arealateral);
         System.out.println("El area total es: " + areatotal);
         System.out.println("El volumen es: " + volumen);
+        }
             }
             case 12->{
         System.out.println("PRISMA");
-        System.out.print("Introduzca la altura: ");
-        do {
-            altura = scanner.nextDouble();
-        } while (altura <= 0);
-        System.out.print("Ingrese el lado: ");
-        do {
-            distanciaLados = scanner.nextDouble();
-        } while (distanciaLados <= 0);
-
+       while (count < 3) {
+         try {
+            System.out.print("Introduzca la altura: ");
+            do {
+                altura = scanner.nextDouble();
+                if (altura <= 0) {
+                        System.out.println("Valor incorrecto, la altura debe ser positiva");
+                        System.out.print("Ingrese la altura: ");
+                    }
+            } while (altura <= 0);
+            System.out.print("Ingrese la longitud del lado: ");
+            do {
+                distanciaLados = scanner.nextDouble();
+                if (distancialados <= 0) {
+                        System.out.println("Valor incorrecto, la longitud debe ser positiva");
+                        System.out.print("Ingrese la longitud del lado: ");
+                    }
+            } while (distanciaLados <= 0);
+            break;
+         } catch (InputMismatchException e) {
+            System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+         }
+       }
+        if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+        }else {
         pBase = numeroLados*distanciaLados;
         arealateral = pBase * altura;
 
@@ -294,14 +511,30 @@ public class App {
         System.out.println("El area total es: "+areatotal);
         System.out.println("El area lateral es: "+arealateral);
         System.out.println("El volumen es: "+volumen);
+        }
             }
             case 13->{
         System.out.println("TETRAEDRO");
-        System.out.print("Ingrese la arista: ");
-        do {
-            arista = scanner.nextDouble();
-        } while (arista <= 0);
-
+        while (count < 3) {
+            try {
+                System.out.print("Ingrese la arista: ");
+                do {
+                    arista = scanner.nextDouble();
+                    if (arista <= 0) {
+                        System.out.println("Valor incorrecto, la arista debe ser positiva");
+                        System.out.print("Ingrese la arista: ");
+                    }
+                } while (arista <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
+        if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+        }else {
         area = (arista*arista) * Math.sqrt(3);
         volumen = (Math.sqrt(2)/12) * (arista*arista*arista);
         altura = arista * (Math.sqrt(6)/3);
@@ -310,22 +543,47 @@ public class App {
         System.out.println("El area es: "+ area);
         System.out.println("El volumen es: " + volumen);
         System.out.println("La altura es: " + altura);
+        }
             }
             case 14->{
         System.out.println("TRONCO DE CONO");
-        System.out.print("Ingrese el radio mayor: ");
-        do {
-            radiomayor = scanner.nextDouble();
-        } while (radiomayor <= 0);
-        System.out.print("Ingrese el radio menor: ");
-        do {
-            radiomenor = scanner.nextDouble();
-        } while (radiomenor <= 0);
-        System.out.print("Ingrese la altura: ");
-        do {
-            altura = scanner.nextDouble();
-        } while (altura <= 0);
-
+        while (count < 3) {
+            try {
+                System.out.print("Ingrese el radio mayor: ");
+                do {
+                    radiomayor = scanner.nextDouble();
+                    if (radiomayor <= 0) {
+                        System.out.println("Valor incorrecto, el radiomayor debe ser positivo");
+                        System.out.print("Ingrese el radio mayor: ");
+                    }
+                } while (radiomayor <= 0);
+                System.out.print("Ingrese el radio menor: ");
+                do {
+                    radiomenor = scanner.nextDouble();
+                    if (radiomenor <= 0) {
+                        System.out.println("Valor incorrecto, el radio menor debe ser positivo");
+                        System.out.print("Ingrese el radio menor: ");
+                    }
+                } while (radiomenor <= 0);
+                System.out.print("Ingrese la altura: ");
+                do {
+                    altura = scanner.nextDouble();
+                    if (altura <= 0) {
+                        System.out.println("Valor incorrecto, la altura debe ser positiva");
+                        System.out.print("Ingrese la altura: ");
+                    }
+                } while (altura <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
+        
+        if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+        }else {
         restaRadios = radiomayor - radiomenor;
         generatriz = Math.sqrt((altura*altura) + (restaRadios*restaRadios));
         /* para calcular la generatriz se utiliza una modificacion en la formula de la hipotenusa
@@ -341,22 +599,48 @@ public class App {
         System.out.println("El area lateral es: "+ areaLateral);
         System.out.println("El area total es: "+ areaTotal);
         System.out.println("El volumen es: "+ volumen);
+        }
             }
             case 15->{
-            System.out.print("Ingrese la altura: ");
-        do {
-            altura = scanner.nextDouble();
-        } while (altura <= 0);
-        System.out.print("Ingrese la longitud del lado mayor: ");
-        do {
-            ladoMayor = scanner.nextDouble();
-        } while (ladoMayor <= 0);
-        
-        System.out.print("Ingrese la longitud del lado menor: ");
-        do {
-            ladoMenor = scanner.nextDouble(); 
-        } while (ladoMenor <= 0);
+            System.out.println("TRONCO DE PIRAMIDE");
 
+        while (count < 3) {
+            try {
+                System.out.print("Ingrese la altura: ");
+                do {
+                    altura = scanner.nextDouble();
+                    if (altura <= 0) {
+                        System.out.println("Valor incorrecto, la altura debe ser positiva");
+                        System.out.print("Ingrese la altura: ");
+                    }
+                } while (altura <= 0);
+                System.out.print("Ingrese la longitud del lado mayor: ");
+                do {
+                    ladoMayor = scanner.nextDouble();
+                    if (ladoMayor <= 0) {
+                        System.out.println("Valor incorrecto, la longitud debe ser positiva");
+                        System.out.print("Ingrese la longitud del lado mayor: ");
+                    }
+                } while (ladoMayor <= 0);
+                
+                System.out.print("Ingrese la longitud del lado menor: ");
+                do {
+                    ladoMenor = scanner.nextDouble(); 
+                    if (ladoMenor <= 0) {
+                        System.out.println("Valor incorrecto, la longitud debe ser positiva");
+                        System.out.print("Ingrese la longitud del lado menor: ");
+                    }
+                } while (ladoMenor <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
+        if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+        }else {
         aBasemayor = ladoMayor * ladoMayor;
         aBasemenor = ladoMenor * ladoMenor;
         pBasemayor = ladoMayor * 4; //4 es la cant de lados
@@ -371,56 +655,98 @@ public class App {
         System.out.println("El area lateral es: " + areaLateral);
         System.out.println("El area total es: " + areaTotal);
         System.out.println("El volumen es: " + volumen);
-
+        }
             }
             case 16->{
         System.out.println("ZONA ESFERICA");
-        /*se vuelven a pedir los valores porque es un calculo de una zona
-          en especifico de la esfera */
-        System.out.print("Ingrese el radio mayor: ");
-        do {
-            radiomayor = scanner.nextDouble();
-        } while (radiomayor <= 0);
-        System.out.print("Ingrese el radio menor: ");
-        do {
-            radiomenor = scanner.nextDouble();
-        } while (radiomenor <= 0);
         
-        System.out.print("Ingrese la altura: ");
-        do {
-            altura = scanner.nextDouble();
-        } while (altura <= 0);
+        while (count < 3) {
+            try {
+                System.out.print("Ingrese el radio mayor: ");
+                do {
+                    radiomayor = scanner.nextDouble();
+                    if (radiomayor <= 0) {
+                        System.out.println("Valor incorrecto, el radio mayor debe ser positivo");
+                        System.out.print("Ingrese el radio mayor: ");
+                    }
+                } while (radiomayor <= 0);
+                System.out.print("Ingrese el radio menor: ");
+                do {
+                    radiomenor = scanner.nextDouble();
+                    if (radiomenor <= 0) {
+                        System.out.println("Valor incorrecto, el radio debe ser positivo");
+                        System.out.print("Ingrese el radio menor: ");
+                    }
+                } while (radiomenor <= 0);
+                System.out.print("Ingrese la altura: ");
+                do {
+                    altura = scanner.nextDouble();
+                    if (altura <= 0) {
+                        System.out.println("Valor incorrecto, la altura debe ser positiva");
+                        System.out.print("Ingrese la altura: ");
+                    }
+                } while (altura <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
 
-        System.out.println("::::::::::::::::::::::::::::::");
+    if(count == 3){
+        System.out.println("Se agotaron los intentos.");
+    }else {
         areaZonaEsferica = 2 * (3.1416) * radiomayor * altura;
         volumenZonaEsferica = ((3.1416) * altura * ((altura*altura) + 3*(radiomenor*radiomenor) + 3*(radiomayor*radiomayor)))/6;
+        System.out.println("::::::::::::::::::::::::::::::");
         System.out.println("el area de la zona esferica es: "+ areaZonaEsferica);
         System.out.println("el voluemen de la zona esfercia es: "+ volumenZonaEsferica);
 
         System.out.println("CASQUETE ESFERICO");
         /*se vuelven a pedir los valores porque es un calculo de una zona
           en especifico de la esfera */
-        System.out.print("Ingrese el radio mayor: ");
-        do {
-            radiomayorCasquete = scanner.nextDouble();
-        } while (radiomayorCasquete <= 0);
-        
-        System.out.print("Ingrese la altura: ");
-        do {
-            alturaCasquete = scanner.nextDouble();
-        } while (alturaCasquete <= 0);
+        while (count < 3) {
+            try {
+                System.out.print("Ingrese el radio mayor: ");
+                do {
+                    radiomayorCasquete = scanner.nextDouble();
+                    if (radiomayorCasquete <= 0) {
+                                System.out.println("Valor incorrecto, el radio debe ser positivo");
+                                System.out.print("Ingrese el radio mayor: ");
+                            }
+                } while (radiomayorCasquete <= 0);
+                
+                System.out.print("Ingrese la altura: ");
+                do {
+                    alturaCasquete = scanner.nextDouble();
+                    if (alturaCasquete <= 0) {
+                                System.out.println("Valor incorrecto, la altura debe ser positiva");
+                                System.out.print("Ingrese la altura: ");
+                            }
+                } while (alturaCasquete <= 0);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Valor incorrecto, intente nuevamente.");
+                scanner.nextLine();
+                count++;
+            }
+        }
+        if(count == 3){
+            System.out.println("Se agotaron los intentos.");
+        }else {
+            areaCasquete = 2 * (3.1416) * radiomayorCasquete * alturaCasquete;
+            volumenCasquete = (((3.1416) * (alturaCasquete*alturaCasquete)) * ((3*radiomayorCasquete) - alturaCasquete))/3;
+            System.out.println("::::::::::::::::::::::::::::::");
+            System.out.println("el area del casquete esferico es: "+ areaCasquete);
+            System.out.println("el volumen del casquete esferico es: "+ volumenCasquete);
+        }
 
-        System.out.println("::::::::::::::::::::::::::::::");
-        areaCasquete = 2 * (3.1416) * radiomayorCasquete * alturaCasquete;
-        volumenCasquete = (((3.1416) * (alturaCasquete*alturaCasquete)) * ((3*radiomayorCasquete) - alturaCasquete))/3;
-        System.out.println("el area del casquete esferico es: "+ areaCasquete);
-        System.out.println("el volumen del casquete esferico es: "+ volumenCasquete);
+    }
             }
             case 17 ->{
         System.out.println("Usted salio con exito");
-            }
-        
-                
+            } 
         }
         scanner.close();
     }
