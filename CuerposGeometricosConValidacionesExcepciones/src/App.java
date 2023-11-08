@@ -37,8 +37,14 @@ public class App {
         
         do {
           opc = scanner.nextByte(); 
-                count++; 
-        } while ((opc < 1 || opc > 17) && count < 3);
+          if ((opc < 1 || opc > 17) && count < 3) {
+            System.out.println("Valor incorrecto. Ingrese la opcion otra vez");
+            count++; 
+          }else if(count == 3){
+            System.out.println("Demasiados intentos, el programa termino");
+            break;
+          }
+        } while ((opc < 1 || opc > 17));
 
          Opciones(opc);
     }
